@@ -19,7 +19,7 @@ const bmiMark2 = massMark2 / heightMark2 ** 2;
 const bmiJohn2 = massJohn2 / (heightJohn2 * heightJohn2);
 const markHigherBMI2 = bmiMark2 > bmiJohn2;
 console.log(bmiMark2, bmiJohn2, markHigherBMI2);
-*/
+
 
 //Challange 2
 const massMark = 78;
@@ -29,9 +29,31 @@ const heightJohn = 1.95;
 const bmiMark = massMark / heightMark ** 2;
 const bmiJohn = massJohn / (heightJohn * heightJohn);
 
-if (bmiMark > bmiJohn) {
+if(bmiMark > bmiJohn) {
   console.log(`Mark's BMI (${bmiMark}) is higher than John's (${bmiJohn})!`);
 } else {
   console.log(`John's BMI (${bmiJohn}) is higher than Mark's (${bmiMark})!`);
 }
+*/
 
+const dolphinsFirstResult = 97;
+const dolphinsSecondResult = 112;
+const dolphinsThirdResult = 80;
+
+const koalasFirstResult = 109;
+const koalasSecondResult = 95;
+const koalasThirdResult = 50;
+
+const dolphinsAverageScore = (dolphinsFirstResult + dolphinsSecondResult + dolphinsThirdResult) / 3;
+
+const koalasAverageScore = (koalasFirstResult + koalasSecondResult + koalasThirdResult) / 3;
+
+if(dolphinsAverageScore > koalasAverageScore && dolphinsAverageScore >= 100) {
+  console.log('Dolphins is the winners!');
+} else if (koalasAverageScore > dolphinsAverageScore && koalasAverageScore >= 100) {
+  console.log('Koalas is the winners!');
+} else if (koalasAverageScore === dolphinsAverageScore &&koalasAverageScore >= 100) {
+  console.log('It is a draw!');
+} else {
+  console.log('No team wins the trophy!');
+}
