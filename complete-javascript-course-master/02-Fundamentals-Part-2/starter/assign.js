@@ -49,3 +49,13 @@ const describePopulationUkraine = describePopulation('Ukraine', 41.5);
 console.log(describePopulationUkraine);
 const describePopulationEngland = describePopulation('England', 68.5);
 console.log(describePopulationEngland);
+
+const populations = [147, 88, 47.5, 69];
+console.log(populations.length === 4);
+const percentages = [
+  percentageOfWorld1(populations[0]), 
+  percentageOfWorld1(populations[1]), 
+  percentageOfWorld1(populations[2]), 
+  percentageOfWorld1(populations[3])
+];
+console.log(percentages);

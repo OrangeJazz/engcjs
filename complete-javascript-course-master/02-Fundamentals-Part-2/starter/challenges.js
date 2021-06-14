@@ -17,8 +17,10 @@ const checkWinner = function(avgDolphins, avgKoalas) {
 
 checkWinner(avgScoreDolphins, avgScoreKoalas);
 
-//
+//2
 avgScoreDolphins = calcAverage(85, 54, 41);
 avgScoreKoalas = calcAverage(23, 34, 27);
 console.log(avgScoreDolphins, avgScoreKoalas);
 checkWinner(avgScoreDolphins, avgScoreKoalas);
+
+
