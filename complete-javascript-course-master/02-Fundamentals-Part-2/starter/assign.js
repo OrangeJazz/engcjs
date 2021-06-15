@@ -59,3 +59,42 @@ const percentages = [
   percentageOfWorld1(populations[3])
 ];
 console.log(percentages);
+
+const neighbours = ['Ukraine', 'China', 'Belorus', 'Japane', 'Kazahstan'];
+neighbours.push('Utopia');
+console.log(neighbours);
+neighbours.pop();
+console.log(neighbours);
+if(!neighbours.includes('Germany')) {
+  console.log('Probably not a central European country :D'); 
+}  
+neighbours[neighbours.indexOf('China')] = 'Republic of Sweden';
+console.log(neighbours);
+
+const myCountry = {
+  coutry: 'Russia',
+  capital: 'Moscow',
+  language: 'russian',
+  populations: 147,
+  neighbours: ['Ukraine', 'China', 'Belorus', 'Japane', 'Kazahstan'],
+  describe: function() {
+    return `${this.coutry} has ${this.populations} million ${this.language}-speaking people, ${this.neighbours.length} neighbouring countries and a capital called ${this.capital}.`
+  },
+  checkIsland: function() {
+    this.isIsland = this.neighbours.length === 0 ? true : false;
+    return this.isIsland;
+
+    // this.isIsland = !Boolean(this.neighbours.length);
+  }
+}
+
+// console.log(`${myCountry.coutry} has ${myCountry.populations} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}.`);
+
+// myCountry.populations += 2;
+// console.log(myCountry.populations);
+// myCountry['populations'] -= 2;
+// console.log(myCountry.populations);
+
+console.log(myCountry.describe());
+console.log(myCountry.checkIsland());
+console.log(myCountry.isIsland);
