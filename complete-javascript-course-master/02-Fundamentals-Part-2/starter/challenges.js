@@ -41,7 +41,7 @@ const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
 console.log(tips);
 const total = [bills[0] + tips[0], bills[1] + tips[1], bills[1] + tips[1]];
 console.log(total);
-*/
+
 
 //Challenge 3
 
@@ -76,4 +76,34 @@ if (mark.bmi > john.bmi) {
   console.log(`${john.firstName} ${john.lastName}'s BMI (${john.bmi}) and ${mark.firstName} ${mark.lastName}'s BMI (${mark.bmi}) are equal`);
 }
 
+*/
 
+//Challenge 4
+// const test = [1, 2, 3, 3, 2, 1];
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
+const calcTip = function(bill) {
+  if (bill >= 50 && bill <= 300) {
+    return bill * 0.15;
+  } else {
+    return bill * 0.2;
+  }
+}
+
+const calcAverage = function(arr) {
+  let sum = 0;
+  for(let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  const avg = sum/arr.length;
+  return avg;
+}
+
+for(let i = 0; i < bills.length; i++) {
+  tips.push(calcTip(bills[i]));
+  totals.push(bills[i] + tips[i]);
+}
+
+console.log(bills, tips, totals);
+console.log(calcAverage(totals));
