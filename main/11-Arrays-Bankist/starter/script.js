@@ -2,6 +2,103 @@
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
+
+
+
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// LECTURES
+
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+/////////////////////////////////////////////////
+
+// Simple Array Methods
+/*
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// SLICE unmuted
+console.log(arr.slice(2));
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-2));
+console.log(arr.slice(-1));
+console.log(arr.slice(1, -1));
+console.log(arr.slice());
+console.log([...arr]);
+
+// SPLICE muted
+// console.log(arr.splice(2));
+arr.splice(-1);
+console.log(arr);
+arr.splice(1, 2);
+console.log(arr);
+
+// REVERSE muted
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr2);
+
+// CONCAT unmuted
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]);
+
+// JOIN unmuted converse to string
+console.log(letters.join(' - '));
+*/
+
+//////////////////////////////
+// Looping Arrays: forEach
+/*
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for (const movement of movements) {
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movemont ${i+1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movemont ${i+1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('-----FOREACH------');
+movements.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`Movemont ${i+1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movemont ${i+1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+*/
+
+//////////////////////
+// forEach With Maps and Sets
+/*
+//Map
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// Set
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+*/
+
+////////////////////////////////////
+// PROJECT: "Bankist" App
+
 // BANKIST APP
 
 // Data
@@ -61,16 +158,25 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+  //.textContent = 0
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+  movements.forEach(function (mov, i) {
+    
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+    const html = `
+      <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${i + 1}</div>
+          <div class="movements__value">${mov}€</div>
+      </div>
+    `;
 
-/////////////////////////////////////////////////
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+
+console.log(containerMovements.innerHTML);
