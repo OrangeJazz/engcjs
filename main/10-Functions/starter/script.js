@@ -263,30 +263,152 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 /*
-1. Создайте метод с именем 'registerNewAnswer' для объекта 'poll'. Метод делает 2 вещи:
-  1.1. Отображение окна подсказки для пользователя, чтобы ввести номер выбранной опции. Приглашение должно выглядеть так:
-        Какой твой любимый язык программирования?
-        0: JavaScript
-        1: Python
-        2: Ржавчина
-        3: C ++
-        (Напишите номер варианта)
-  
-  1.2. На основе введенного числа обновите массив ответов. Например, если параметр равен 3, увеличьте значение В ПОЛОЖЕНИИ 3 массива на 1. Убедитесь, что введено число, и имеет ли оно смысл (например, ответ 52 не имеет смысла, верно?)
-2. Вызывайте этот метод всякий раз, когда пользователь нажимает кнопку «Ответить на опрос».
-3. Создайте метод displayResults, который отображает результаты опроса. Метод принимает в качестве входных данных строку (называемую «типом»), которая может быть либо «строкой», либо «массивом». Если типом является «массив», просто отобразите массив результатов как есть, используя console.log (). Это должен быть вариант по умолчанию. Если тип - «строка», отобразите строку типа «Результаты опроса: 13, 2, 4, 1».
-4. Запускайте метод displayResults в конце каждого вызова метода registerNewAnswer.
-
-ПОДСКАЗКА: используйте многие инструменты, о которых вы узнали в этом и последнем разделе 😉
-
-БОНУС: используйте метод displayResults для отображения 2 массивов в тестовых данных. Используйте как «массив», так и «строку». НЕ помещайте массивы в объект опроса! Итак, как должно выглядеть ключевое слово this в этой ситуации?
-
-ДАННЫЕ БОНУСНОГО ТЕСТА 1: [5, 2, 3]
-ДАННЫЕ БОНУСНОГО ТЕСТА 2: [1, 5, 3, 9, 6, 1]
-*/
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
   // This generates [0, 0, 0, 0]. More in the next section 😃
   answers: new Array(4).fill(0),
+  
+  registerNewAnswer: function () {
+    const answer = Number(prompt(`${this.question}\n ${this.options}? \n (Write option number)`));
+    typeof answer === 'number' && answer >= 0 && answer <= 3 && this.answers[answer]++;
+    // console.log(this.answers);
+    this.displayResults();
+    this.displayResults('string');
+  },
+
+  displayResults: function (type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
+  },
 };
+// poll.registerNewAnswer();
+console.log(poll.aswers);
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+console.log(poll.answers);
+poll.displayResults('string');
+
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+*/
+
+////////////////////////////////////
+// Immediately Invoked Function Expressions (IIFE)
+/*
+const runOnce = function () {
+  console.log('This will never run again');
+};
+runOnce();
+
+//IIFE
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+// console.log(isPrivate);
+
+(() => console.log('This will ALSO never run again'))();
+
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+// console.log(isPrivate);
+console.log(notPrivate);
+*/
+
+////////////////////////////////////
+// Closures
+/*
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passenger`);
+  }
+}
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+
+console.dir(booker);
+*/
+
+/*
+//Example 1
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a*2);
+  }
+}
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b*2);
+  }
+}
+
+g();
+f();
+console.dir(f);
+// Re-assigning f function
+h();
+f();
+console.dir(f);
+
+// Example 2
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+
+  console.log(`Will start boarding in ${wait} seconds`);
+}
+
+
+const perGroup = 1000;
+boardPassengers(180, 3);
+*/
+
+/////////////////////////////////////
+// Challenge 2
+
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+*/
+
+/*
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+  const body = document.querySelector('body');
+  const c = function () {
+    header.style.color = 'blue';
+  };
+  body.addEventListener('click', c);
+  // console.dir(c);
+  // body.addEventListener('click', function() {console.dir(c);});
+})();
+*/
