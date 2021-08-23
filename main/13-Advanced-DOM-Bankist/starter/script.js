@@ -7,6 +7,12 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const nav = document.querySelector('.nav');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
 
 ///////////////////////////////////////
 // Modal window
@@ -39,10 +45,10 @@ document.addEventListener('keydown', function (e) {
 
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = section1.getBoundingClientRect();
-  console.log(s1coords);
+  // console.log(s1coords);
   // console.log(e.target.getBoundingClientRect());  // характеристика положения элемента относительно видимой части страницы
 
-  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset); // расстояние Х,Y от начала страницы до видимой части
+  // console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset); // расстояние Х,Y от начала страницы до видимой части
 
   // console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth); //высота и ширина видимой части страницы
 
@@ -99,9 +105,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 
 // Building a Tabbed Component
 
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
+
 
 
 /*
@@ -127,11 +131,73 @@ tabsContainer.addEventListener('click', function (e) {
 
 });
 
+// Menu fade animation
 
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
 
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
+  }
+};
+// Passing "argument" into handler
+nav.addEventListener('mouseover', handleHover.bind(0.5));
 
+nav.addEventListener('mouseout', handleHover.bind(1));
 
+// Sticky navigation
+/*
+const initialCoords = section1.getBoundingClientRect();
+window.addEventListener('scroll', function () {
 
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+  
+});
+*/
+
+// console.log(navHeight);
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
+
+// Revealing Elements on Scroll
+const allSections = document.querySelectorAll('.section');
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold:0.15,
+});
+
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
 
 
 
@@ -339,3 +405,29 @@ console.log(h1.parentElement.children); //to take all sibling elements, not only
 //////////////////////////
 // Building a Tabbed Component
 
+/////////////////////////
+// Passing Arguments to Event Handlers ??? повторить foo.bind()
+
+///////////////////
+// Implementing a Sticky Navigation: The Scroll Event
+
+/////////////////////////
+// A Better Way: The Intersection Observer API
+/*
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
+
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2],
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
+*/
+
+/////////////////////////////////
+// Revealing Elements on Scroll
