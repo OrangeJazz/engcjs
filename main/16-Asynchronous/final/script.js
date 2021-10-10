@@ -35,10 +35,10 @@ const getJSON = function (url, errorMsg = 'Something went wrong') {
   });
 };
 
-/*
+
 ///////////////////////////////////////
 // Our First AJAX Call: XMLHttpRequest
-
+/*
 const getCountryData = function (country) {
   const request = new XMLHttpRequest();
   request.open('GET', `https://restcountries.eu/rest/v2/name/${country}`);
